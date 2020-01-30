@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Not yet titled</title>
+  <style>
+
+  </style>
+</head>
+<body>
+  <script>
+      let choices = ["rock", "paper", "scissors"];
+      let playerScore = 0;
+      let cpuScore = 0;
+      let round = 0;
+      let x = "HELLO";
+      let playerSelection;
+      let computerSelection;
+
+      const capitalize = (s) => {
+        if (typeof s !== 'string') return ''
+        return s.charAt(0).toUpperCase() + s.slice(1)
+        }    
+
+      function computerPlay() {
+          let num = Math.floor(Math.random() * 3) + 1;
+          return choices[num-1];
+      }     
+      
+      function rpsRound(playerSelection, computerSelection) {
+        playerSelection = prompt("Rock, paper, scissors. Best of 5.\nEnter your choice!", "").toLowerCase();
+
+        if (playerSelection != "paper" && playerSelection != "scissors" && playerSelection != "rock") {
+            playerSelection = prompt("Input invalid, please enter 'Rock', 'Paper', or 'Scissors'", "").toLowerCase();
+        }
+        
+        computerSelection = computerPlay();
+        console.log("Computer played: " + capitalize(computerSelection));
+        console.log("Player chose: " + capitalize(playerSelection));
+
+        
+
+        if (computerSelection == playerSelection) {
+            return "It's a tie!";
+        } else if ((playerSelection == "rock" && computerSelection == "paper") || 
+                    (playerSelection == "paper" && computerSelection == "scissors") ||
+                    (playerSelection == "scissors" && computerSelection == "rock")) {
+            cpuScore++;
+            return capitalize(computerSelection) + " beats " + capitalize(playerSelection) + ". Computer wins the round!";            
+        } else {
+            playerScore++;
+            return capitalize(playerSelection) + " beats " + capitalize(computerSelection)+ ". Player wins the round!";
+        }
+      }
+
+      console.log(game());
+
+      function game() {
+        do {
+        console.log(rpsRound());
+        console.log("Player Score: " + playerScore + " | Computer Score: " + cpuScore)
+
+        }        
+        while (playerScore < 3 && cpuScore < 3);
+        if (playerScore == 3) {
+            console.log("Player wins the series!")
+        } else {
+            console.log("Computer wins the series!")
+        }
+        
+
+      }
+  </script>
+</body>
+</html>
