@@ -12,35 +12,34 @@
       let choices = ["rock", "paper", "scissors"];
       let playerScore = 0;
       let cpuScore = 0;
-      let round = 0;
-      let x = "HELLO";
       let playerSelection;
       let computerSelection;
 
+      //capitalizes first letter of a string, used wherever necessary for styling purposes
       const capitalize = (s) => {
         if (typeof s !== 'string') return ''
         return s.charAt(0).toUpperCase() + s.slice(1)
         }    
 
+      //determines a random number from 1 to 3 and then selects that position from the choices array
       function computerPlay() {
           let num = Math.floor(Math.random() * 3) + 1;
           return choices[num-1];
       }     
       
+      //a single round of rps, got long, consider breaking this into shorter functions if you revisit
       function rpsRound(playerSelection, computerSelection) {
         playerSelection = prompt("Rock, paper, scissors. Best of 5.\nEnter your choice!", "").toLowerCase();
 
         if (playerSelection != "paper" && playerSelection != "scissors" && playerSelection != "rock") {
             playerSelection = prompt("Input invalid, please enter 'Rock', 'Paper', or 'Scissors'", "").toLowerCase();
         }
-        
+
         computerSelection = computerPlay();
         console.log("Computer played: " + capitalize(computerSelection));
-        console.log("Player chose: " + capitalize(playerSelection));
+        console.log("Player chose: " + capitalize(playerSelection));        
 
-        
-
-        if (computerSelection == playerSelection) {
+        if (computerSelection == playerSelection) { //first checks for a tie, the checks for cpu win condition, if no tie and no cpu win then player win is assumed
             return "It's a tie!";
         } else if ((playerSelection == "rock" && computerSelection == "paper") || 
                     (playerSelection == "paper" && computerSelection == "scissors") ||
@@ -53,22 +52,20 @@
         }
       }
 
-      console.log(game());
+      console.log(game()); //run the game function, should probably go somewhere else?
 
       function game() {
         do {
         console.log(rpsRound());
         console.log("Player Score: " + playerScore + " | Computer Score: " + cpuScore)
-
         }        
         while (playerScore < 3 && cpuScore < 3);
+
         if (playerScore == 3) {
             console.log("Player wins the series!")
         } else {
-            console.log("Computer wins the series!")
-        }
-        
-
+            console.log("Computer wins the series!") //if you revisit, add an option to start a new series after win condition is met
+        }      
       }
   </script>
 </body>
